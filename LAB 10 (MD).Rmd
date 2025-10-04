@@ -1,0 +1,58 @@
+---
+title: "LAB 10 (MD)"
+author: "Ingrid Villarreal V"
+date: "2025-10-04"
+output: html_document
+---
+
+Crear una matriz aleatoria de 200*200
+```{r}
+M <- matrix(runif(200*200,min=0, max=100), ncol=200)
+diag(M)<-1
+head(M[,1:16])
+dim(M)
+```
+
+Grafica la matriz
+```{r}
+library (igraph)
+g <- graph.adjacency(M, mode="undirected", weighted=TRUE)
+g
+plot(g)
+```
+
+Transforma la matriz en en NEGATIVA y para identificar los máximos
+```{r}
+M<- -M
+head(M[,1:6])
+```
+
+Grafica nueva con matriz negativa, ver el espacio-producto, tecnológico 
+```{r}
+library(igraph)
+
+g <- graph.adjacency(M, mode="undirected", weighted=TRUE)
+MST <- minimum.spanning.tree(g)
+plot(MST, vertex.shape="none", vertex.label.cex=0.7)
+```
+
+Matriz de adyacencias (nuevo relacionamiento)
+```{r}
+A<- get.adjacency(MST,sparse = F)
+```
+
+Ver las aristas que hay entre los nodos
+```{r}
+head(A)
+```
+
+VER LAS ARISTAS(PESOS)
+```{r}
+write.graph(MST, file="g.gml", format="gml")
+```
+
+Exportar resultados para cytoscape o gephi
+```{r}
+write.csv(A,file="Adyacences.csv")
+```
+

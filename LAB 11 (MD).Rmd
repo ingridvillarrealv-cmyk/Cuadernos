@@ -1,0 +1,58 @@
+---
+title: "LAB 11 (MD)"
+author: "Ingrid Villarreal V"
+date: "2025-10-04"
+output: html_document
+---
+
+Ubicar archivo
+```{r}
+file.choose()
+```
+
+Importar matriz "relatednessbinario.csv"
+```{r}
+M = as.matrix(
+  read.csv("C:\\Users\\Ingrid\\Downloads\\relatednessbinario.csv" , 
+           sep = ",", 
+           header = T, 
+           row.names = 1))
+
+head (M[,1:10])
+dim (M)
+```
+
+Grafica la matriz de proximidades natural
+```{r}
+library (igraph)
+red_hidalgo1 <- graph.adjacency(M, mode="undirected", weighted=TRUE)
+plot(red_hidalgo1)
+```
+
+Transforma la matriz en en NEGATIVA y para identificar los máximos
+```{r}
+M <- -M
+head(M[,1:6])
+```
+
+grafica la nueva matriz negativa con MST
+```{r}
+red_hidalgo2 <- graph.adjacency(M, mode="undirected", weighted=TRUE)
+MST <- minimum.spanning.tree(red_hidalgo2)
+plot(MST,vertex.shape="none",vertex.label.cex=.7)
+```
+
+Exportar LISTA DE EDGE
+```{r}
+library(igraph)
+
+write_graph(MST, file = "redhidalgo2.gml", format = "gml")
+```
+
+Exportar matriz de proximos adyacentes
+```{r}
+A<- get.adjacency(MST, sparse = F) 
+
+write.csv(A,file = "adeyacentesconMST.csv")
+```
+

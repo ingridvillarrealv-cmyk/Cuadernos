@@ -1,0 +1,56 @@
+---
+title: "LAB 20 (MD)"
+author: "Ingrid Villarreal V"
+date: "2025-10-04"
+output: html_document
+---
+
+Cargar libreria ggplot2 
+```{r}
+library(ggplot2)
+```
+
+Buscar df
+```{r}
+file.choose()
+```
+
+Leer base
+```{r}
+densidad_verde <- read.csv("C:\\Users\\Ingrid\\Desktop\\Complejidad económica\\LAB 20\\PARA FACETING.csv")
+```
+
+Ver nombres
+```{r}
+names(densidad_verde)
+```
+
+Colocando grafica base
+```{r}
+P <- ggplot(data = densidad_verde,
+            mapping = aes(x = DENSITY,
+                          y = PCI.2018,
+                          color = Region)) +
+  geom_point()
+```
+
+Crear objeto p
+```{r}
+P
+```
+
+Facet_wrap (recomendado con una variable)
+```{r}
+P + facet_wrap(~ Region)
+```
+
+Manipulando número de filas
+```{r}
+P + facet_wrap(~ Region, nrow = 3)
+```
+
+Manipulando número de columnas
+```{r}
+P + facet_wrap(~ Region, ncol = 5)
+```
+

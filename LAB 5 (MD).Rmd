@@ -1,0 +1,37 @@
+---
+title: "LAB 5 (MD)"
+author: "Ingrid Villarreal V"
+date: "2025-10-03"
+output: html_document
+---
+
+Cargar paquete tidyverse y readr
+```{r}
+library(tidyverse)
+library(readr)
+```
+
+Cargar datos
+```{r}
+library(readr)
+ICE2014 <- read_csv("C:/Users/Ingrid/Desktop/Complejidad económica/LAB 5/ICE2014.csv")
+head(ICE2014)
+names(ICE2014)
+```
+
+1. Pivotar tabla  "A LO LARGO"
+```{r}
+t1_PIVOTANTE = ICE2014 %>%
+  pivot_longer(cols = c("Km,0"   ,   "Km,2"   ,   "Km,4"   ,   "Km,6"   ,   "Km,8"    ,  "Km,10"  ,   "Km,12"  ,   "Km,14"  ,   "Km,16"  ,   "Km,18"   ,  "Km,20" ), names_to = "iteracion", values_to = "ranking")
+```
+
+Exportar resultado: tabla ordenada
+```{r}
+write.csv(t1_PIVOTANTE, file = "ice_CHARTICULATOR.csv")
+```
+
+```{r}
+getwd()
+setwd("C:/Users/Ingrid/Desktop")
+```
+

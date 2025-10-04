@@ -1,0 +1,57 @@
+---
+title: "LAB 9 (MD)"
+author: "Ingrid Villarreal V"
+date: "2025-10-03"
+output: html_document
+---
+
+Seleccionar archivo desde la ruta de su ordenador
+```{r}
+library (EconGeo)
+M = as.matrix(
+  read.csv("C:/Users/Ingrid/Downloads/rca_2014.csv", 
+           sep = ",", 
+           header = T, 
+           row.names = 1))
+
+head (M[,1:10])
+dim (M)
+```
+
+Co-ocurrencia entre personas/paises/estados
+```{r}
+co_occurrence(M)
+```
+
+Co-ocurrencia entre productos t es transpuesta
+```{r}
+c = co_occurrence(t(M))
+c
+```
+
+Estima el relacionamiento o proximidad pero normalizado, para asegurar que el numero de co ocurrencias que observamos
+```{r}
+r = relatedness(c)
+r
+```
+
+Es mayor al numero de co ocurrencias probables (probailidad condicional)
+```{r}
+r[r<1] =0
+r[r>1] =1
+r
+```
+
+Exportar resultados del relacionamiento no binario
+```{r}
+library (igraph)
+g1=graph_from_adjacency_matrix(r,mode = "undirected")
+plot(g1)
+```
+
+Exportar resultados de co ocurrencias
+```{r}
+write.csv(r,file="relatedness,csv")
+write.csv(c,file="cocurrences,csv")
+```
+

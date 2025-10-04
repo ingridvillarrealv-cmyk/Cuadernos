@@ -1,0 +1,38 @@
+---
+title: "LAB 16 (MD)"
+author: "Ingrid Villarreal V"
+date: "2025-10-04"
+output: html_document
+---
+
+```{r}
+library(EconGeo)
+```
+
+Cargar data
+```{r}
+EL = read.csv("https://raw.githubusercontent.com/PABalland/ON/master/lesmis-el.csv")
+```
+
+Ver ecabezado
+```{r}
+head(EL)
+```
+
+Transformar a matriz
+```{r}
+MM <- get_matrix(EL)
+
+library(igraph)
+
+g <- graph_from_data_frame(d=EL, directed = F)
+plot(g)
+
+EL$Weight = NULL
+head(EL)
+
+library(networkD3)
+
+simpleNetwork(EL)
+```
+

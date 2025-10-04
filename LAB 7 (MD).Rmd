@@ -1,0 +1,51 @@
+---
+title: "LAB 7 (MD)"
+author: "Ingrid Villarreal V"
+date: "2025-10-03"
+output: html_document
+---
+
+Gestión de datos de red
+
+1. Transformar la matriz en un dataframe
+```{r}
+library (EconGeo)
+
+M = as.matrix(
+  read.csv("https://raw.githubusercontent.com/PABalland/ON/master/amz.csv" , 
+           sep = ",", 
+           header = T, 
+           row.names = 1))
+
+M
+```
+
+La forma más usual de encontrar los datos
+```{r}
+EL = get_list(M)
+colnames(EL) = c("customer", "product", "content")
+```
+
+Convertir un dataframe(lista) en matriz
+```{r}
+MM = get_matrix(EL)
+MM
+```
+
+Edge list (lista de aristas(source-target----adyacentes-mis 3 columnas)
+```{r}
+EL
+```
+
+Matriz de adyancencia
+```{r}
+get_matrix(EL)
+```
+
+Buscar Andrea
+```{r}
+x = subset (EL, product == "Tie")
+
+x
+```
+
